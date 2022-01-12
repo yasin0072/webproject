@@ -32,6 +32,7 @@ const store = createStore({
 
 const app = createApp(App);
 // app.component(store);
+
 app.use(router);
 app.use(store);
 app.mount("#app");

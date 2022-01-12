@@ -1,5 +1,5 @@
 <template>
-  <div id="calendar" :v-show="userRole == 'student'">
+  <div id="calendar" :v-show="userRole == 'instructor'">
     <!-- <div class=""></div>
     <DatePicker
       v-model="date"
@@ -86,7 +86,7 @@ export default {
         dayMaxEvents: true,
         // weekends: true,
         // select: this.handleDateSelect,
-        // eventClick: this.handleEventClick,
+        eventClick: this.handleEventClick,
         // eventsSet: this.handleEvents,
         // dateClick: this.eventClick,
       },
@@ -130,6 +130,7 @@ export default {
     //     var eventDate = this.startDates[i].substring(0, 10);
     //     var eventStartTime = this.startDates[i].substring(11, 19);
     //     var eventEndTime = this.endDates[i].substring(11, 19);
+
     //     var newEventDate = this.calendarOptions.events[i].start.substring(
     //       0,
     //       10
@@ -163,20 +164,20 @@ export default {
     // handleDateClick(arg) {
     //   alert("date click! " + arg.dateStr);
     // },
-    // handleEventClick(arg) {
-    //   console.log(arg.event);
-    //   console.log(arg.event.end);
-    // console.log(arg.event.end);
-    // },
+    handleEventClick(arg) {
+      console.log(arg.event);
+      console.log(arg.event.end);
+      // console.log(arg.event.end);
+    },
   },
   created() {
     axios
       .get(
-        "http://localhost:8081/scheduling/student/courses?email=" +
+        "http://localhost:8081/scheduling/instructor/instructor-course?email=" +
           localStorage.getItem("email")
       )
       .then((response) => {
-        // console.log(response);
+        console.log(response);
         this.lessons = response.data;
         // console.log(this.lessons);
       })

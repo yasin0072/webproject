@@ -1,5 +1,5 @@
 <template>
-  <div :v-show="userRole == 'student'">
+  <div :v-show="userRole == 'instructor'">
     <div class="row">
       <div class="col">
         <table class="table">
@@ -88,7 +88,7 @@ export default {
       )
       .then((response) => {
         // console.log(response);
-        console.log(response.data);
+        // console.log(response.data);
         this.lessons = response.data;
         // console.log(this.lessons);
       })

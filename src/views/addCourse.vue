@@ -1,5 +1,5 @@
 <template>
-  <div class="signup">
+<div class="AddCourse" :v-show="userRole == 'instructor'">
     <section class="page-section" id="contact">
       <div class="container">
         <h2
@@ -9,11 +9,13 @@
             mb-0
           "
         >
-          Signup
+          Add Course
         </h2>
         <div class="divider-custom">
           <div class="divider-custom-line"></div>
+          <div class="divider-custom-line"></div>
         </div>
+        
         <form id="contactForm" @submit="checkForm">
           <p v-if="errors.length">
             <b>Please correct the following error(s)</b>
@@ -26,53 +28,54 @@
           </p>
         <div class="row justify-content-center mt-5">
             <div class="col-sm-3">
-              <label for="firstname" class="mb-0">First Name</label>
+              <label id="datefield" for="date" class="mb-0" >Date</label>
             </div>
             <div class="col-sm-3 text-secondary">
-              <input id="firstname"
-              v-model="firstname" type="firstname" class="form-control" name="firstname"
-              placeholder="Enter firstname" >
+              <input id="date"
+              v-model="date" type="date" class="form-control" :min="mindate" name="date">
             </div>
           </div>
           <div class="row mt-4 justify-content-center">
             <div class="col-sm-3">
-              <label for="lastname" class="mb-0">Last Name</label>
+              <label for="startTime" class="mb-0">Start Time</label>
             </div>
             <div class="col-sm-3 text-secondary">
-              <input id="lastname"
-              v-model="lastname" type="lastname" class="form-control" name="lastname"
-              placeholder="Enter lastname" >
+              <input id="startTime"
+              v-model="startTime" type="time" class="form-control" name="startTime">
             </div>
           </div>
           <div class="row mt-4 justify-content-center">
             <div class="col-sm-3">
-              <label for="email" class="mb-0">Email</label>
+              <label for="email" class="mb-0">End Time</label>
             </div>
             <div class="col-sm-3 text-secondary">
-              <input id="email"
-              v-model="email" class="form-control" name="email"
-              placeholder="Enter e-mail" >
+              <input id="endTime"
+              v-model="endTime" type="time" class="form-control" name="endTime" :min="startTime">
             </div>
           </div>
           <div class="row mt-4 justify-content-center">
             <div class="col-sm-3">
-              <label for="password" class="mb-0">Password</label>
+              <label for="topic" class="mb-0">Topic</label>
             </div>
             <div class="col-sm-3 text-secondary">
-              <input id="password"
-              v-model="password" type="password" class="form-control" name="password"
-              placeholder="Enter password" >
+              <input id="topic"
+              v-model="topic" type="topic" class="form-control" name="topic"
+              placeholder="Enter Topic" >
             </div>
-            
           </div>
           <div class="row mt-4 justify-content-center">
             <div class="col-sm-3">
-              <label for="role" class="mb-0">Select Role</label>
+              <label for="level" class="mb-0">Level</label>
             </div>
             <div class="col-sm-3 text-secondary">
-              <select id="role" v-model="role" name="role" class="form-control">
-                <option>instructor</option>
-                <option>student</option>
+              <select id="level" v-model="level" name="level" class="form-control">
+               <!-- <option value="" disabled selected>Select your option</option> -->
+                <option>A1</option>
+                <option>A2</option>
+                <option>B1</option>
+                <option>B2</option>
+                <option>C1</option>
+                <option>C2</option>
               </select>
             </div>
           </div>
@@ -95,71 +98,78 @@ export default {
   name: "signup",
   data() {
     return {
-      firstname: null,
-      lastname: null,
-      email: null,
-      password: null,
-      role: null,
+      userRole: localStorage.getItem("role"),
+      date: null,
+      startTime: null,
+      endTime: null,
+      topic: null,
       errors: [],
+      level: null,
+      mindate: null,
     };
+  },
+  created() {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+      dd = "0" + dd;
+    }
+    if (mm < 10) {
+      mm = "0" + mm;
+    }
+
+    today = yyyy + "-" + mm + "-" + dd;
+    this.mindate = today;
   },
   methods: {
     submit() {
+      var email = localStorage.getItem("email");
+      console.log(this.startTime);
       const headers = {
-        id: null,
-        name: this.firstname,
-        email: this.email,
-        active: null,
-        password: this.password,
-        surname: this.lastname,
+        courseDto: {
+          date: this.date,
+          startTime: this.startTime,
+          endTime: this.endTime,
+          langLvl: this.level,
+          topic: this.topic,
+        },
+        email: email,
       };
       var json = JSON.stringify(headers);
       const res = axios
         .post(
-          "http://localhost:8081/scheduling/auth/" + this.role + "-signup",
+          "http://localhost:8081/scheduling/instructor/create-course",
           json,
           {
             headers: {
-              // Overwrite Axios's automatically set Content-Type
               "Content-Type": "application/json",
             },
           }
         )
         .then((response) => {
-          console.log(response.data);
-          if (response.data == "success") {
-            alert("Account is created");
-            this.$router.push({ path: "login" });
-          } else {
-            alert("E-mail is used before");
-          }
-        })
-        .catch((error) => {
-          alert(error);
+          console.log(response);
+          alert(response.data);
         });
-
-      // res.data.data; // '{"answer":42}'
-      // res.data.headers['Content-Type']; // 'application/json',
-      //   .then(response => (console.log(response.data)))
-      //   .catch((error) => {
-      //   console.log(error);
-      // });
+      this.$router.go();
     },
     checkForm: function (e) {
       this.errors = [];
-      if (!this.firstname) {
-        this.errors.push("First name required.");
+      if (!this.date) {
+        this.errors.push("Date is required.");
       }
-      if (!this.lastname) {
-        this.errors.push("Last name required.");
+      if (!this.startTime) {
+        this.errors.push("Start Time is required.");
       }
-      if (!this.password) {
-        this.errors.push("Password required.");
+      if (!this.endTime) {
+        this.errors.push("End Time is required.");
       }
-      if (!this.email) {
-        this.errors.push("Email required.");
-      } else if (!this.validEmail(this.email)) {
-        this.errors.push("Valid email required.");
+      if (!this.level) {
+        this.errors.push("language level is required.");
+      }
+      if (!this.topic) {
+        this.errors.push("Topic is required.");
       }
       if (this.errors.length == 0) {
         this.submit();

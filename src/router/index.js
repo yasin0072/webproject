@@ -56,6 +56,31 @@ const routes = [
     name: "instructorAnnulation",
     component: () => import("../views/instructorAnnulation.vue"),
   },
+  {
+    path: "/addCourse",
+    name: "addCourse",
+    component: () => import("../views/addCourse.vue"),
+  },
+  {
+    path: "/accountActivation",
+    name: "accountActivation",
+    component: () => import("../views/accountActivation.vue"),
+  },
+  {
+    path: "/scheduleForm",
+    name: "scheduleForm",
+    component: () => import("../views/scheduleForm.vue"),
+  },
+  {
+    path: "/instructorCalendar",
+    name: "instructorCalendar",
+    component: () => import("../views/instructorCalendar.vue"),
+  },
+  {
+    path: "/instructorReSchedule",
+    name: "instructorReSchedule",
+    component: () => import("../views/instructorReSchedule.vue"),
+  },
 ];
 
 const router = createRouter({
