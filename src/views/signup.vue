@@ -90,77 +90,90 @@
   </div>
 </template>
 <script>
-  import axios from "axios"
-  export default {
-    name: "signup",
-    data() {
-      return {
-        firstname: null,
-        lastname: null,
-        email: null,
-        password: null,
-        role:null,
-        errors: [],
+import axios from "axios";
+export default {
+  name: "signup",
+  data() {
+    return {
+      firstname: null,
+      lastname: null,
+      email: null,
+      password: null,
+      role: null,
+      errors: [],
+    };
+  },
+  methods: {
+    submit() {
+      const headers = {
+        id: null,
+        name: this.firstname,
+        email: this.email,
+        active: null,
+        password: this.password,
+        surname: this.lastname,
       };
-    },
-    methods: {
-      submit() {
-        const headers = { 
-          "id":null,
-          "name":this.firstname,
-          "email":this.email,
-          "active":null,
-          "password":this.password,
-          "surname":this.lastname
-        };
-        var json=JSON.stringify(headers)
-        const res = axios.post("http://localhost:8081/scheduling/auth/"+this.role+"-signup" ,json, {
-          headers: {
-          // Overwrite Axios's automatically set Content-Type
-          'Content-Type': 'application/json'
+      var json = JSON.stringify(headers);
+      const res = axios
+        .post(
+          "http://localhost:8081/scheduling/auth/" + this.role + "-signup",
+          json,
+          {
+            headers: {
+              // Overwrite Axios's automatically set Content-Type
+              "Content-Type": "application/json",
+            },
           }
-          });
-          alert("Account is created");
+        )
+        .then((response) => {
+          console.log(response.data);
+          if (response.data == "success") {
+            alert("Account is created");
+            this.$router.push({ path: "login" });
+          } else {
+            alert("E-mail is used before");
+          }
+        })
+        .catch((error) => {
+          alert(error);
+        });
 
-          // res.data.data; // '{"answer":42}'
-          // res.data.headers['Content-Type']; // 'application/json',
+      // res.data.data; // '{"answer":42}'
+      // res.data.headers['Content-Type']; // 'application/json',
       //   .then(response => (console.log(response.data)))
       //   .catch((error) => {
       //   console.log(error);
       // });
-      // this.$router.push({ path: 'login' })
-        
-      },
-      checkForm: function (e) {
-        this.errors = [];
-        if (!this.firstname) {
-          this.errors.push("First name required.");
-        }
-        if (!this.lastname) {
-          this.errors.push("Last name required.");
-        }
-        if (!this.password) {
-          this.errors.push("Password required.");
-        }
-        if (!this.email) {
-          this.errors.push("Email required.");
-        } else if (!this.validEmail(this.email)) {
-          this.errors.push("Valid email required.");
-        }
-        if (this.errors.length==0) {
-          this.submit()
-        }
-
-        e.preventDefault();
-      },
-      validEmail: function (email) {
-        var re =
-          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(email);
-     },
     },
-  };
+    checkForm: function (e) {
+      this.errors = [];
+      if (!this.firstname) {
+        this.errors.push("First name required.");
+      }
+      if (!this.lastname) {
+        this.errors.push("Last name required.");
+      }
+      if (!this.password) {
+        this.errors.push("Password required.");
+      }
+      if (!this.email) {
+        this.errors.push("Email required.");
+      } else if (!this.validEmail(this.email)) {
+        this.errors.push("Valid email required.");
+      }
+      if (this.errors.length == 0) {
+        this.submit();
+      }
+
+      e.preventDefault();
+    },
+    validEmail: function (email) {
+      var re =
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+    },
+  },
+};
 </script>
 <style scoped src="@/css/styles.css">
-
 </style>

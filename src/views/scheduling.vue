@@ -9,8 +9,14 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="clickable-row" v-for="row in teachers" :key="row">
-              <td scope="row" @click="selectTeacher(row)">{{ row }}</td>
+            <tr
+              class="clickable-row"
+              v-for="(row, index) in teachers"
+              :key="row"
+            >
+              <td scope="row" @click="selectTeacher(index)">
+                {{ teachers[index] }}
+              </td>
             </tr>
           </tbody>
         </table>
@@ -36,7 +42,7 @@
             <tr v-for="courseRow in instructorNumber" :key="courseRow">
               <td>
                 <button
-                  @click="enrollLesson(courseRow - 1, selectedTeacher)"
+                  @click="enrollLesson(courseRow - 1)"
                   class="btn btn-primary"
                 >
                   Enroll
@@ -77,15 +83,20 @@ export default {
       level: [],
       topic: [],
       lessonID: null,
+      insEmail: [],
     };
   },
   methods: {
     selectTeacher(e) {
-      this.selectedTeacher = e;
+      this.selectedTeacher = this.instructors[e].email;
+      console.log(this.instructors);
+      // this.selectedTeacher = e;
       for (let i = 0; i < this.instructors.length; i++) {
-        if (this.selectedTeacher == this.instructors[i].name) {
+        if (this.selectedTeacher == this.instructors[i].email) {
+          console.log(this.instructors[i].email == this.selectedTeacher);
+          // console.log(this.selectedTeacher);
           this.instructorNumber = this.instructors[i].courseList.length;
-          for (let k = 0; k < this.instructors[i].courseList.length; k++) {
+          for (let k = 0; k < this.instructorNumber; k++) {
             this.date[k] = this.instructors[i].courseList[k].date;
             this.start[k] = this.instructors[i].courseList[k].startTime;
             this.end[k] = this.instructors[i].courseList[k].endTime;
@@ -96,15 +107,16 @@ export default {
         }
       }
     },
-    enrollLesson(index, teacher) {
-      //   console.log(this.instructors);
-      for (let i = 0; i < this.instructors.length; i++) {
-        if (teacher == this.instructors[i].name) {
+    enrollLesson(index) {
+      for (let i = 0; i < this.instructors.length + 1; i++) {
+        if (this.selectedTeacher == this.instructors[i].email) {
+          console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+          console.log(this.instructors[i]);
           this.lessonID = this.instructors[i].courseList[index].id;
+          break;
         }
         // console.log(this.lessonID);
         // console.log(this.$store.state.token);
-        break;
       }
       axios
         .post(
@@ -131,8 +143,12 @@ export default {
       .get("http://localhost:8081/scheduling/instructor/all")
       .then((response) => {
         this.instructors = response.data;
+        // console.log(this.instructors);
         for (let i = 0; i < this.instructors.length; i++) {
           this.teachers[i] = this.instructors[i].name;
+          this.insEmail[i] = this.instructors[i].email;
+          // console.log(this.insEmail[i]);
+          // console.log(localStorage.getItem("email"));
         }
       })
       .catch((error) => {

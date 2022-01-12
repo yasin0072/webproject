@@ -20,6 +20,113 @@
                   >login</a
                 ></router-link
               >
+            </li>
+            <li class="nav-item mx-0 mx-lg-1" v-show="userRole == 'instructor'">
+              <router-link to="/instructorCalendar" class="text-decoration-none"
+                ><a
+                  v-show="userRole == 'instructor'"
+                  class="nav-link py-2 px-0 px-lg-3 rounded"
+                  href="#instructorCalendar"
+                  >Calendar</a
+                ></router-link
+              >
+            </li>
+            <li class="nav-item mx-0 mx-lg-1" v-show="userRole == 'instructor'">
+              <router-link
+                to="/instructorReSchedule"
+                class="text-decoration-none"
+                ><a
+                  v-show="userRole == 'instructor'"
+                  class="nav-link py-2 px-0 px-lg-3 rounded"
+                  href="#instructorReSchedule"
+                  >Schedule</a
+                ></router-link
+              >
+            </li>
+            <li class="nav-item mx-0 mx-lg-1" v-show="userRole == 'instructor'">
+              <router-link to="/instructorPage" class="text-decoration-none"
+                ><a
+                  v-show="userRole == 'instructor'"
+                  class="nav-link py-2 px-0 px-lg-3 rounded"
+                  href="#instructorPage"
+                  >Applications</a
+                ></router-link
+              >
+            </li>
+            <li class="nav-item mx-0 mx-lg-1" v-show="userRole == 'instructor'">
+              <router-link to="/addCourse" class="text-decoration-none"
+                ><a
+                  v-show="userRole == 'instructor'"
+                  class="nav-link py-2 px-0 px-lg-3 rounded"
+                  href="#addCourse"
+                  >addCourse</a
+                ></router-link
+              >
+            </li>
+
+            <li class="nav-item mx-0 mx-lg-1" v-show="userRole == 'instructor'">
+              <router-link
+                to="/instructorAnnulation"
+                class="text-decoration-none"
+                ><a
+                  v-show="userRole == 'instructor'"
+                  class="nav-link py-2 px-0 px-lg-3 rounded"
+                  href="#instructorAnnulation"
+                  >Annulation</a
+                ></router-link
+              >
+            </li>
+            <li class="nav-item mx-0 mx-lg-1" v-show="userRole == 'student'">
+              <router-link to="/calendar" class="text-decoration-none"
+                ><a
+                  v-show="userRole == 'student'"
+                  class="nav-link py-2 px-0 px-lg-3 rounded"
+                  href="#calendar"
+                  >Calendar</a
+                ></router-link
+              >
+            </li>
+            <li class="nav-item mx-0 mx-lg-1" v-show="userRole == 'student'">
+              <router-link to="/scheduling" class="text-decoration-none"
+                ><a
+                  v-show="userRole == 'student'"
+                  class="nav-link py-2 px-0 px-lg-3 rounded"
+                  href="#calendar"
+                  >Enrollment</a
+                ></router-link
+              >
+            </li>
+            <li class="nav-item mx-0 mx-lg-1" v-show="userRole == 'student'">
+              <router-link to="/scheduleForm" class="text-decoration-none"
+                ><a
+                  v-show="userRole == 'student'"
+                  class="nav-link py-2 px-0 px-lg-3 rounded"
+                  href="#scheduleForm"
+                  >Reschedule</a
+                ></router-link
+              >
+            </li>
+            <li class="nav-item mx-0 mx-lg-1" v-show="userRole == 'student'">
+              <router-link to="/studentAnnulation" class="text-decoration-none"
+                ><a
+                  v-show="userRole == 'student'"
+                  class="nav-link py-2 px-0 px-lg-3 rounded"
+                  href="#studentAnnulation"
+                  >Annulation</a
+                ></router-link
+              >
+            </li>
+            <li class="nav-item mx-0 mx-lg-1" v-show="userRole == 'admin'">
+              <router-link to="/accountActivation" class="text-decoration-none"
+                ><a
+                  v-show="userRole == 'admin'"
+                  class="nav-link py-2 px-0 px-lg-3 rounded"
+                  href="#accountActivation"
+                  >Activation</a
+                ></router-link
+              >
+            </li>
+            <li class="nav-item mx-0 mx-lg-1">
               <router-link to="/logout" class="text-decoration-none"
                 ><a
                   v-show="userRole != undefined"

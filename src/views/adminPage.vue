@@ -93,9 +93,9 @@ export default {
           }
         )
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           this.lessons = response.data;
-          console.log(this.lessons);
+          // console.log(this.lessons);
         })
         .then((response) => {
           for (let i = 0; i < this.lessons.length; i++) {

@@ -88,7 +88,7 @@ export default {
       )
       .then((response) => {
         // console.log(response);
-        console.log(response.data);
+        // console.log(response.data);
         this.lessons = response.data;
         // console.log(this.lessons);
       })
