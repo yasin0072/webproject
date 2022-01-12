@@ -1,5 +1,9 @@
 <template>
+<<<<<<< HEAD
   <div :v-show="userRole == 'student'">
+=======
+  <div>
+>>>>>>> b7d907bf279fd19d8b3be329315b8e597941458c
     <div class="row">
       <div class="col">
         <table class="table">
@@ -64,6 +68,7 @@
         </table>
       </div>
     </div>
+<<<<<<< HEAD
     <br />
     <hr />
     <!-- ------------------------------------------------------------------------------------ -->
@@ -118,6 +123,8 @@
         </table>
       </div>
     </div>
+=======
+>>>>>>> b7d907bf279fd19d8b3be329315b8e597941458c
   </div>
 </template>
 <script>
@@ -125,7 +132,10 @@ import axios from "axios";
 export default {
   data() {
     return {
+<<<<<<< HEAD
       userRole: localStorage.getItem("role"),
+=======
+>>>>>>> b7d907bf279fd19d8b3be329315b8e597941458c
       courseNumber: 0,
       insName: [],
       insSurname: [],
@@ -141,6 +151,7 @@ export default {
       newDate: [],
       newStartTime: [],
       newEndTime: [],
+<<<<<<< HEAD
 
       inputTopic: [],
       inputDate: [],
@@ -154,12 +165,15 @@ export default {
       scheduledNumber: 0,
       reScheduledCourses: [],
       scheduleID: [],
+=======
+>>>>>>> b7d907bf279fd19d8b3be329315b8e597941458c
     };
   },
   methods: {
     reSchedule(index) {
       axios.post(
         "http://localhost:8081/scheduling/reschedule/request?time1=" +
+<<<<<<< HEAD
           this.newStartTime[index] +
           "&time2=" +
           this.newEndTime[index] +
@@ -178,6 +192,15 @@ export default {
           this.reScheduledCourses[index].id +
           "&isAccepted=" +
           answer
+=======
+          this.newStartTime +
+          "&time2=" +
+          this.newEndTime +
+          "&date=" +
+          this.newDate +
+          "&courseId=" +
+          this.lessons[index].id
+>>>>>>> b7d907bf279fd19d8b3be329315b8e597941458c
       );
       this.$router.go();
     },
@@ -254,6 +277,7 @@ export default {
         this.courseNumber = this.lessons.length;
         // console.log(this.startTime, this.minTime);
       });
+<<<<<<< HEAD
     axios
       .get(
         "http://localhost:8081/scheduling/student/rescheduled-courses?email=" +
@@ -280,6 +304,11 @@ export default {
         }
         this.scheduledNumber = this.reScheduledCourses.length;
       });
+=======
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+>>>>>>> b7d907bf279fd19d8b3be329315b8e597941458c
   },
 };
 </script>

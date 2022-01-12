@@ -1,5 +1,9 @@
 <template>
+<<<<<<< HEAD
   <div :v-show="userRole == 'instructor'">
+=======
+  <div>
+>>>>>>> b7d907bf279fd19d8b3be329315b8e597941458c
     <div class="row">
       <div class="col">
         <table class="table">
@@ -64,6 +68,7 @@
         </table>
       </div>
     </div>
+<<<<<<< HEAD
     <br />
     <!-- --------------------------------------------------------------------------------------------------- -->
     <hr />
@@ -119,6 +124,8 @@
         </table>
       </div>
     </div>
+=======
+>>>>>>> b7d907bf279fd19d8b3be329315b8e597941458c
   </div>
 </template>
 <script>
@@ -126,7 +133,10 @@ import axios from "axios";
 export default {
   data() {
     return {
+<<<<<<< HEAD
       userRole: localStorage.getItem("role"),
+=======
+>>>>>>> b7d907bf279fd19d8b3be329315b8e597941458c
       courseNumber: 0,
       insName: [],
       insSurname: [],
@@ -142,6 +152,7 @@ export default {
       newDate: [],
       newStartTime: [],
       newEndTime: [],
+<<<<<<< HEAD
 
       inputTopic: [],
       inputDate: [],
@@ -155,6 +166,8 @@ export default {
       scheduledNumber: 0,
       reScheduledCourses: [],
       scheduleID: [],
+=======
+>>>>>>> b7d907bf279fd19d8b3be329315b8e597941458c
     };
   },
   methods: {
@@ -168,6 +181,7 @@ export default {
           "&date=" +
           this.newDate[index] +
           "&courseId=" +
+<<<<<<< HEAD
           this.lessons[index].id +
           "&email=" +
           localStorage.getItem("email")
@@ -183,6 +197,11 @@ export default {
           answer
       );
       this.$router.go();
+=======
+          this.lessons[index].id
+      );
+      //   this.$router.go();
+>>>>>>> b7d907bf279fd19d8b3be329315b8e597941458c
     },
     // enrollLesson(index, teacher) {
     //   //   console.log(this.instructors);
@@ -249,16 +268,25 @@ export default {
           this.startTime[i] = this.lessons[i].startTime;
           this.endTime[i] = this.lessons[i].endTime;
           this.topic[i] = this.lessons[i].topic;
+<<<<<<< HEAD
           this.insName[i] = this.lessons[i].courseTakenDto.name;
           this.insSurname[i] = this.lessons[i].courseTakenDto.surname;
         }
 
+=======
+          this.insName[i] = this.lessons[i].instructor.name;
+          this.insSurname[i] = this.lessons[i].instructor.surname;
+          this.level[i] = this.lessons[i].langLvl;
+          this.courseId[i] = this.lessons[i].id;
+        }
+>>>>>>> b7d907bf279fd19d8b3be329315b8e597941458c
         this.courseNumber = this.lessons.length;
         // console.log(this.startTime, this.minTime);
       });
     //   .catch((error) => {
     //     console.log(error);
     //   });
+<<<<<<< HEAD
 
     // // // // axios burakdan gelecek
     axios
@@ -287,6 +315,8 @@ export default {
         }
         this.scheduledNumber = this.reScheduledCourses.length;
       });
+=======
+>>>>>>> b7d907bf279fd19d8b3be329315b8e597941458c
   },
 };
 </script>

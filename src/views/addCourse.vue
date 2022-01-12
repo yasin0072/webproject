@@ -1,5 +1,9 @@
 <template>
+<<<<<<< HEAD
 <div class="AddCourse" :v-show="userRole == 'instructor'">
+=======
+<div class="AddCourse">
+>>>>>>> b7d907bf279fd19d8b3be329315b8e597941458c
     <section class="page-section" id="contact">
       <div class="container">
         <h2
@@ -93,6 +97,7 @@
   </div>
 </template>
 <script>
+<<<<<<< HEAD
 import axios from "axios";
 export default {
   name: "signup",
@@ -186,4 +191,94 @@ export default {
 };
 </script>
 <style scoped src="@/css/styles.css">
+=======
+  import axios from "axios"
+  export default {
+    name: "signup",
+    data() {
+      return {
+        date: null,
+        startTime: null,
+        endTime: null,
+        topic:null,
+        errors: [],
+        level:null,
+        mindate:null,
+      };
+    },
+    created(){
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        if(dd<10){
+            dd='0'+dd
+        } 
+        if(mm<10){
+            mm='0'+mm
+        } 
+
+        today = yyyy+'-'+mm+'-'+dd;
+        this.mindate=today
+    },
+    methods: {
+      submit() {
+        var email=localStorage.getItem("email")
+        console.log(this.startTime)
+        const headers = { 
+        "courseDto": { 
+            "date":this.date,
+            "startTime":this.startTime,
+            "endTime":this.endTime,
+            "langLvl":this.level,
+            "topic":this.topic
+        },
+        "email": email
+        };
+        var json=JSON.stringify(headers)
+        const res = axios.post("http://localhost:8081/scheduling/instructor/create-course" ,json, {
+          headers: {
+          'Content-Type': 'application/json'
+          }
+          })
+          .then((response) => {
+        console.log(response);
+        alert(response.data);
+      })
+        this.$router.go();
+      },
+      checkForm: function (e) {
+        this.errors = [];
+        if (!this.date) {
+          this.errors.push("Date is required.");
+        }
+        if (!this.startTime) {
+          this.errors.push("Start Time is required.");
+        }
+        if (!this.endTime) {
+          this.errors.push("End Time is required.");
+        }
+        if (!this.level) {
+          this.errors.push("language level is required.");
+        }
+        if (!this.topic) {
+          this.errors.push("Topic is required.");
+        }
+        if (this.errors.length==0) {
+          this.submit()
+        }
+
+        e.preventDefault();
+      },
+      validEmail: function (email) {
+        var re =
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+     },
+    },
+  };
+</script>
+<style scoped src="@/css/styles.css">
+
+>>>>>>> b7d907bf279fd19d8b3be329315b8e597941458c
 </style>

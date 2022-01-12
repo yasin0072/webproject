@@ -45,7 +45,10 @@ export default {
     // let date = new Date();
     // date.setMinutes(0, 0, 0);
     return {
+<<<<<<< HEAD
       userRole: localStorage.getItem("role"),
+=======
+>>>>>>> b7d907bf279fd19d8b3be329315b8e597941458c
       modalShow: false,
       titles: [],
       date: [],
