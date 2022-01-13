@@ -67,7 +67,7 @@ export default {
           right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
         },
         // eventResizableFromStart: true,
-        weekends: false,
+        // weekends: false,
         selectable: true,
         validRange: {
           start: "00:01",

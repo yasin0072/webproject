@@ -1,10 +1,7 @@
 <template>
   <div id="page">
     <!-- <router-view /> -->
-    <img
-      src="https://clipart.world/wp-content/uploads/2021/06/Welcome-clipart-download.png"
-      alt=""
-    />
+    <img src="../../assets/hello.jpg" alt="" />
   </div>
 </template>
 
@@ -13,4 +10,11 @@ export default {
   name: "home",
 };
 </script>
-<style scoped src="@/css/styles.css"></style>
+<style scoped>
+img {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  max-width: 75%;
+}
+</style>

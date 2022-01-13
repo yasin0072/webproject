@@ -9,7 +9,7 @@
               <th scope="col">Date</th>
               <th scope="col">Start Time</th>
               <th scope="col">End Time</th>
-              <th scope="col">Instructor Name</th>
+              <th scope="col">Student Name</th>
               <th scope="col">New Date</th>
               <th scope="col">New Start Time</th>
               <th scope="col">New End Time</th>
@@ -161,18 +161,23 @@ export default {
     reSchedule(index) {
       // console.log(this.newStartTime);
       // console.log(this.newDate[index]);
-      axios.post(
-        "http://localhost:8081/scheduling/reschedule/request?time1=" +
-          this.newStartTime[index] +
-          "&time2=" +
-          this.newEndTime[index] +
-          "&date=" +
-          this.newDate[index] +
-          "&courseId=" +
-          this.lessons[index].id +
-          "&email=" +
-          localStorage.getItem("email")
-      );
+      axios
+        .post(
+          "http://localhost:8081/scheduling/reschedule/request?time1=" +
+            this.newStartTime[index] +
+            "&time2=" +
+            this.newEndTime[index] +
+            "&date=" +
+            this.newDate[index] +
+            "&courseId=" +
+            this.lessons[index].id +
+            "&email=" +
+            localStorage.getItem("email")
+        )
+        .then((response) => {
+          alert(response.data);
+          this.$router.go();
+        });
       // this.$router.go();
     },
     answer(index, answer) {
@@ -251,7 +256,7 @@ export default {
           this.endTime[i] = this.lessons[i].endTime;
           this.topic[i] = this.lessons[i].topic;
           if (this.lessons[i].courseTakenDto != undefined) {
-            console.log(this.lessons[i].courseTakenDto);
+            // console.log(this.lessons[i].courseTakenDto);
             this.insName[i] = this.lessons[i].courseTakenDto.student.name;
             this.insSurname[i] = this.lessons[i].courseTakenDto.student.surname;
           } else {
@@ -284,7 +289,7 @@ export default {
             this.reScheduledCourses[i].rescheduleDto.endTime;
 
           this.inputTopic[i] = this.reScheduledCourses[i].topic;
-          if (this.lessons[i].courseTakenDto != undefined) {
+          if (this.reScheduledCourses[i].courseTakenDto != undefined) {
             this.inputInsName[i] =
               this.reScheduledCourses[i].courseTakenDto.student.name;
             this.inputInsSurname[i] =

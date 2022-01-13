@@ -1,14 +1,17 @@
 <template>
   <div id="nav" class="text-start">
     <nav
-      :v-show="userRole == undefined"
       class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top"
       id="mainNav"
     >
       <div class="container">
         <router-link to="/" class="text-decoration-none"
-          ><a class="navbar-brand">Homepage</a></router-link
-        >
+          ><a class="navbar-brand"
+            ><img
+              style="max-width: 100%; max-height: 100% padding: 5px"
+              src="../assets/asd.png"
+              alt="" /></a
+        ></router-link>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item mx-0 mx-lg-1">

@@ -138,6 +138,7 @@ export default {
         email: email,
       };
       var json = JSON.stringify(headers);
+      // console.log(json);
       const res = axios
         .post(
           "http://localhost:8081/scheduling/instructor/create-course",

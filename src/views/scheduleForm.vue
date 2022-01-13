@@ -159,18 +159,22 @@ export default {
   methods: {
     reSchedule(index) {
       // console.log(this.newEndTime[index]);
-      axios.post(
-        "http://localhost:8081/scheduling/reschedule/request?time1=" +
-          this.newStartTime[index] +
-          "&time2=" +
-          this.newEndTime[index] +
-          "&date=" +
-          this.newDate[index] +
-          "&courseId=" +
-          this.lessons[index].id +
-          "&email=" +
-          localStorage.getItem("email")
-      );
+      axios
+        .post(
+          "http://localhost:8081/scheduling/reschedule/request?time1=" +
+            this.newStartTime[index] +
+            "&time2=" +
+            this.newEndTime[index] +
+            "&date=" +
+            this.newDate[index] +
+            "&courseId=" +
+            this.lessons[index].id +
+            "&email=" +
+            localStorage.getItem("email")
+        )
+        .then((response) => {
+          alert(response.data);
+        });
       this.$router.go();
     },
     answer(index, answer) {

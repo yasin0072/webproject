@@ -84,8 +84,8 @@
   </div>
 </template>
 <script>
-import {mapMutations} from "vuex"
-import axios from "axios"
+import { mapMutations } from "vuex";
+import axios from "axios";
 export default {
   name: "login",
   data() {
@@ -95,69 +95,70 @@ export default {
       role: null,
       email: null,
       password: null,
-      token: null
+      token: null,
     };
   },
   methods: {
-    ...mapMutations(["assignToken","assignRole","assignEmail"]),
-    submit: function(){
-        axios.post("http://localhost:8081/scheduling/auth/"+this.role+"-signin?email=" + this.email +"&password="+this.password)
-        .then(response => (this.token=response.data))
-        .then(response => {
-            // that.$store.commit('LOGIN_SUCCESS', response.data)
-            // console.log(this.store.$state.token);
-            // console.log(this.token);
-            
-            // this.$store.state.token=response.data
-            // console.log(this.token)
-            // this.$store.commit('assignToken', response.data)
-            // this.assignToken(this.token)
+    ...mapMutations(["assignToken", "assignRole", "assignEmail"]),
+    submit: function () {
+      axios
+        .post(
+          "http://localhost:8081/scheduling/auth/" +
+            this.role +
+            "-signin?email=" +
+            this.email +
+            "&password=" +
+            this.password
+        )
+        .then((response) => (this.token = response.data))
+        .then((response) => {
+          // that.$store.commit('LOGIN_SUCCESS', response.data)
+          // console.log(this.store.$state.token);
+          // console.log(this.token);
 
-            localStorage.setItem("token",this.token)
-            // console.log(this.$store.state.token)
-            if(this.token =="user does not exists"){
-              alert(this.token)
-              // this.$router.push({ path: 'calendar' })
+          // this.$store.state.token=response.data
+          // console.log(this.token)
+          // this.$store.commit('assignToken', response.data)
+          // this.assignToken(this.token)
+
+          localStorage.setItem("token", this.token);
+          // console.log(this.$store.state.token)
+          if (this.token == "user does not exists") {
+            alert(this.token);
+            // this.$router.push({ path: 'calendar' })
+          } else if (this.token == "user is not activated") {
+            alert(this.token);
+            // this.$router.push({ path: 'calendar' })
+          } else if (this.token == "wrong password") {
+            alert(this.token);
+            // this.$router.push({ path: 'calendar' })
+          } else if (this.token != null) {
+            if (this.role == "admin") {
+              // this.assignRole(this.role)
+              // this.assignEmail(this.email)
+              localStorage.setItem("email", this.email);
+              localStorage.setItem("role", this.role);
+              this.$router.push({ path: "adminPage" });
+            } else if (this.role == "student") {
+              // this.assignRole(this.role)
+              // this.assignEmail(this.email)
+              localStorage.setItem("email", this.email);
+              localStorage.setItem("role", this.role);
+              this.$router.push({ path: "calendar" });
+            } else {
+              // this.assignRole(this.role)
+              // this.assignEmail(this.email)
+              localStorage.setItem("role", this.role);
+              console.log(localStorage.getItem("role"));
+              localStorage.setItem("email", this.email);
+              this.$router.push({ path: "instructorCalendar" });
             }
-            else if(this.token =="user is not activated"){
-              alert(this.token)
-              // this.$router.push({ path: 'calendar' })
-            }
-            else if(this.token =="wrong password"){
-              alert(this.token)
-              // this.$router.push({ path: 'calendar' })
-            }
-            else if (this.token !=null) {
-              if(this.role=="admin"){
-                // this.assignRole(this.role)
-                // this.assignEmail(this.email)
-                localStorage.setItem("email",this.email)
-                localStorage.setItem("role",this.role)
-                this.$router.push({ path: 'adminPage' })
-              }
-              else if (this.role=="student"){
-                // this.assignRole(this.role)
-                // this.assignEmail(this.email)
-                localStorage.setItem("email",this.email)
-                localStorage.setItem("role",this.role)
-                this.$router.push({ path: 'calendar' })
-              }
-              else{
-                // this.assignRole(this.role)
-                // this.assignEmail(this.email)
-                localStorage.setItem("role",this.role)
-                console.log(localStorage.getItem('role'))
-                localStorage.setItem("email",this.email)
-                this.$router.push({ path: 'instructorPage' })
-              }
-              
-            }
-            })
-            .catch((error) => {
-              console.log(error)
-            });
-            // console.log(this.info)
-        
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      // console.log(this.info)
     },
     checkForm: function (e) {
       this.errors = [];
@@ -173,8 +174,8 @@ export default {
       } else if (!this.validEmail(this.email)) {
         this.errors.push("Valid email required.");
       }
-      if (this.errors.length==0) {
-        this.submit()
+      if (this.errors.length == 0) {
+        this.submit();
       }
       e.preventDefault();
     },
