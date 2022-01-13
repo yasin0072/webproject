@@ -1,9 +1,5 @@
 <template>
-<<<<<<< HEAD
   <div :v-show="userRole == 'instructor'">
-=======
-  <div>
->>>>>>> b7d907bf279fd19d8b3be329315b8e597941458c
     <div class="row">
       <div class="col">
         <table class="table">
@@ -68,7 +64,6 @@
         </table>
       </div>
     </div>
-<<<<<<< HEAD
     <br />
     <!-- --------------------------------------------------------------------------------------------------- -->
     <hr />
@@ -124,8 +119,6 @@
         </table>
       </div>
     </div>
-=======
->>>>>>> b7d907bf279fd19d8b3be329315b8e597941458c
   </div>
 </template>
 <script>
@@ -133,10 +126,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-<<<<<<< HEAD
       userRole: localStorage.getItem("role"),
-=======
->>>>>>> b7d907bf279fd19d8b3be329315b8e597941458c
       courseNumber: 0,
       insName: [],
       insSurname: [],
@@ -152,7 +142,6 @@ export default {
       newDate: [],
       newStartTime: [],
       newEndTime: [],
-<<<<<<< HEAD
 
       inputTopic: [],
       inputDate: [],
@@ -166,13 +155,12 @@ export default {
       scheduledNumber: 0,
       reScheduledCourses: [],
       scheduleID: [],
-=======
->>>>>>> b7d907bf279fd19d8b3be329315b8e597941458c
     };
   },
   methods: {
     reSchedule(index) {
-      console.log(this.newStartTime);
+      // console.log(this.newStartTime);
+      // console.log(this.newDate[index]);
       axios.post(
         "http://localhost:8081/scheduling/reschedule/request?time1=" +
           this.newStartTime[index] +
@@ -181,12 +169,11 @@ export default {
           "&date=" +
           this.newDate[index] +
           "&courseId=" +
-<<<<<<< HEAD
           this.lessons[index].id +
           "&email=" +
           localStorage.getItem("email")
       );
-      this.$router.go();
+      // this.$router.go();
     },
     answer(index, answer) {
       // burağı bekliyor
@@ -197,11 +184,6 @@ export default {
           answer
       );
       this.$router.go();
-=======
-          this.lessons[index].id
-      );
-      //   this.$router.go();
->>>>>>> b7d907bf279fd19d8b3be329315b8e597941458c
     },
     // enrollLesson(index, teacher) {
     //   //   console.log(this.instructors);
@@ -268,25 +250,22 @@ export default {
           this.startTime[i] = this.lessons[i].startTime;
           this.endTime[i] = this.lessons[i].endTime;
           this.topic[i] = this.lessons[i].topic;
-<<<<<<< HEAD
-          this.insName[i] = this.lessons[i].courseTakenDto.name;
-          this.insSurname[i] = this.lessons[i].courseTakenDto.surname;
+          if (this.lessons[i].courseTakenDto != undefined) {
+            console.log(this.lessons[i].courseTakenDto);
+            this.insName[i] = this.lessons[i].courseTakenDto.student.name;
+            this.insSurname[i] = this.lessons[i].courseTakenDto.student.surname;
+          } else {
+            this.insName[i] = "-";
+            this.insSurname[i] = "";
+          }
         }
 
-=======
-          this.insName[i] = this.lessons[i].instructor.name;
-          this.insSurname[i] = this.lessons[i].instructor.surname;
-          this.level[i] = this.lessons[i].langLvl;
-          this.courseId[i] = this.lessons[i].id;
-        }
->>>>>>> b7d907bf279fd19d8b3be329315b8e597941458c
         this.courseNumber = this.lessons.length;
         // console.log(this.startTime, this.minTime);
       });
     //   .catch((error) => {
     //     console.log(error);
     //   });
-<<<<<<< HEAD
 
     // // // // axios burakdan gelecek
     axios
@@ -305,9 +284,16 @@ export default {
             this.reScheduledCourses[i].rescheduleDto.endTime;
 
           this.inputTopic[i] = this.reScheduledCourses[i].topic;
-          this.inputInsName[i] = this.reScheduledCourses[i].courseTakenDto.name;
-          this.inputInsSurname[i] =
-            this.reScheduledCourses[i].courseTakenDto.surname;
+          if (this.lessons[i].courseTakenDto != undefined) {
+            this.inputInsName[i] =
+              this.reScheduledCourses[i].courseTakenDto.student.name;
+            this.inputInsSurname[i] =
+              this.reScheduledCourses[i].courseTakenDto.student.surname;
+          } else {
+            this.inputInsName[i] = "-";
+            this.inputInsSurname[i] = "";
+          }
+
           this.scheduleID[i] = this.reScheduledCourses[i].id;
           this.inputDate[i] = this.reScheduledCourses[i].date;
           this.inputStartTime[i] = this.reScheduledCourses[i].startTime;
@@ -315,8 +301,6 @@ export default {
         }
         this.scheduledNumber = this.reScheduledCourses.length;
       });
-=======
->>>>>>> b7d907bf279fd19d8b3be329315b8e597941458c
   },
 };
 </script>
