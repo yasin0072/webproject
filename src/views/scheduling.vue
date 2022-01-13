@@ -15,7 +15,7 @@
               :key="row"
             >
               <td scope="row" @click="selectTeacher(index)">
-                {{ teachers[index] }}
+                {{ row }}
               </td>
             </tr>
           </tbody>
@@ -90,20 +90,22 @@ export default {
   methods: {
     selectTeacher(e) {
       this.selectedTeacher = this.instructors[e].email;
-      console.log(this.instructors);
+      // console.log(this.instructors);
       // this.selectedTeacher = e;
       for (let i = 0; i < this.instructors.length; i++) {
         if (this.selectedTeacher == this.instructors[i].email) {
-          console.log(this.instructors[i].email == this.selectedTeacher);
-          // console.log(this.selectedTeacher);
+          // console.log(this.instructors[i].email == this.selectedTeacher);
           this.instructorNumber = this.instructors[i].courseList.length;
-          for (let k = 0; k < this.instructorNumber; k++) {
+          for (let k = 0; k < this.instructors[i].courseList.length; k++) {
+            // console.log(this.selectedTeacher);
             this.date[k] = this.instructors[i].courseList[k].date;
             this.start[k] = this.instructors[i].courseList[k].startTime;
             this.end[k] = this.instructors[i].courseList[k].endTime;
             this.level[k] = this.instructors[i].courseList[k].langLvl;
             this.topic[k] = this.instructors[i].courseList[k].topic;
+            // console.log(this.date);
           }
+
           break;
         }
       }
@@ -111,8 +113,8 @@ export default {
     enrollLesson(index) {
       for (let i = 0; i < this.instructors.length + 1; i++) {
         if (this.selectedTeacher == this.instructors[i].email) {
-          console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-          console.log(this.instructors[i]);
+          // console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+          // console.log(this.instructors[i]);
           this.lessonID = this.instructors[i].courseList[index].id;
           break;
         }

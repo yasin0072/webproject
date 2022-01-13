@@ -2,6 +2,7 @@
   <div :v-show="userRole == 'instructor'">
     <div class="row">
       <div class="col">
+        <h1>Course List</h1>
         <table class="table">
           <thead>
             <tr>
@@ -69,6 +70,7 @@
     <hr />
     <div class="row">
       <div class="col">
+        <h1>Reschedule Requests</h1>
         <table class="table">
           <thead>
             <tr>

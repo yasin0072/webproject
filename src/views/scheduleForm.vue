@@ -2,6 +2,7 @@
   <div :v-show="userRole == 'student'">
     <div class="row">
       <div class="col">
+        <h1>Course List</h1>
         <table class="table">
           <thead>
             <tr>
@@ -67,8 +68,9 @@
     <br />
     <hr />
     <!-- ------------------------------------------------------------------------------------ -->
-    <div class="row">
+    <div v-if="scheduledNumber > 0" class="row">
       <div class="col">
+        <h1>Reschedule Requests</h1>
         <table class="table">
           <thead>
             <tr>
