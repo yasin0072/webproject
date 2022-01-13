@@ -70,7 +70,7 @@ export default {
 
     axios
       .get(
-        "http://localhost:8081/scheduling/instructor/accept-list?email=" +
+        "https://mambly-backend-app.herokuapp.com/scheduling/instructor/accept-list?email=" +
           localStorage.getItem("email")
       )
       .then((response) => {
@@ -97,7 +97,7 @@ export default {
   methods: {
     answer(index, answer) {
       axios.post(
-        "http://localhost:8081/scheduling/enroll/course-acceptance?courseId=" +
+        "https://mambly-backend-app.herokuapp.com/scheduling/enroll/course-acceptance?courseId=" +
           this.lessons[index].id +
           "&isAccepted=" +
           answer

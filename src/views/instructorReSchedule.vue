@@ -165,7 +165,7 @@ export default {
       // console.log(this.newDate[index]);
       axios
         .post(
-          "http://localhost:8081/scheduling/reschedule/request?time1=" +
+          "https://mambly-backend-app.herokuapp.com/scheduling/reschedule/request?time1=" +
             this.newStartTime[index] +
             "&time2=" +
             this.newEndTime[index] +
@@ -185,7 +185,7 @@ export default {
     answer(index, answer) {
       // burağı bekliyor
       axios.post(
-        "http://localhost:8081/scheduling/reschedule/accept?courseId=" +
+        "https://mambly-backend-app.herokuapp.com/scheduling/reschedule/accept?courseId=" +
           this.reScheduledCourses[index].id +
           "&isAccepted=" +
           answer
@@ -242,7 +242,7 @@ export default {
 
     axios
       .get(
-        "http://localhost:8081/scheduling/instructor/instructor-course?email=" +
+        "https://mambly-backend-app.herokuapp.com/scheduling/instructor/instructor-course?email=" +
           localStorage.getItem("email")
       )
       .then((response) => {
@@ -277,7 +277,7 @@ export default {
     // // // // axios burakdan gelecek
     axios
       .get(
-        "http://localhost:8081/scheduling/instructor/rescheduled-courses?email=" +
+        "https://mambly-backend-app.herokuapp.com/scheduling/instructor/rescheduled-courses?email=" +
           localStorage.getItem("email")
       )
       .then((response) => {

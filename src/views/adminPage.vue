@@ -82,7 +82,7 @@ export default {
       //   console.log(this.filterStartDate);
       axios
         .get(
-          "http://localhost:8081/scheduling/course-date/period?date1=" +
+          "https://mambly-backend-app.herokuapp.com/scheduling/course-date/period?date1=" +
             this.filterStartDate +
             "&date2=" +
             this.filterEndDate,
@@ -130,7 +130,9 @@ export default {
   created() {
     // this.userRole = localStorage.getItem("role");
     axios
-      .get("http://localhost:8081/scheduling/course-date/all")
+      .get(
+        "https://mambly-backend-app.herokuapp.com/scheduling/course-date/all"
+      )
       .then((response) => {
         // console.log(response);
         this.lessons = response.data;

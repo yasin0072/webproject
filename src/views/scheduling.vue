@@ -123,7 +123,7 @@ export default {
       }
       axios
         .post(
-          "http://localhost:8081/scheduling/enroll/enroll-course?studentEmail=" +
+          "https://mambly-backend-app.herokuapp.com/scheduling/enroll/enroll-course?studentEmail=" +
             localStorage.getItem("email") +
             "&courseId=" +
             this.lessonID
@@ -143,7 +143,7 @@ export default {
   },
   created() {
     axios
-      .get("http://localhost:8081/scheduling/instructor/all")
+      .get("https://mambly-backend-app.herokuapp.com/scheduling/instructor/all")
       .then((response) => {
         this.instructors = response.data;
         // console.log(this.instructors);

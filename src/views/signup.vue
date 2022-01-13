@@ -116,7 +116,9 @@ export default {
       var json = JSON.stringify(headers);
       const res = axios
         .post(
-          "http://localhost:8081/scheduling/auth/" + this.role + "-signup",
+          "https://mambly-backend-app.herokuapp.com/scheduling/auth/" +
+            this.role +
+            "-signup",
           json,
           {
             headers: {

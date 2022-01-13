@@ -42,7 +42,7 @@ export default {
     activate(index) {
       axios
         .post(
-          "http://localhost:8081/scheduling/admin/activate-user?email=" +
+          "https://mambly-backend-app.herokuapp.com/scheduling/admin/activate-user?email=" +
             this.accounts[index].email
         )
         .catch((error) => {
@@ -64,7 +64,9 @@ export default {
   created() {
     // this.userRole = localStorage.getItem("role");
     axios
-      .get("http://localhost:8081/scheduling/admin/inactivated-users")
+      .get(
+        "https://mambly-backend-app.herokuapp.com/scheduling/admin/inactivated-users"
+      )
       .then((response) => {
         console.log(response);
         this.accounts = response.data;

@@ -57,7 +57,7 @@ export default {
   methods: {
     answer(index, answer) {
       axios.delete(
-        "http://localhost:8081/scheduling/enroll/cancel-course-student?studentEmail=" +
+        "https://mambly-backend-app.herokuapp.com/scheduling/enroll/cancel-course-student?studentEmail=" +
           localStorage.getItem("email") +
           "&courseId=" +
           this.lessons[index].id
@@ -81,7 +81,7 @@ export default {
 
     axios
       .get(
-        "http://localhost:8081/scheduling/student/courses?email=" +
+        "https://mambly-backend-app.herokuapp.com/scheduling/student/courses?email=" +
           localStorage.getItem("email")
       )
       .then((response) => {

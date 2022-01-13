@@ -172,7 +172,7 @@ export default {
   created() {
     axios
       .get(
-        "http://localhost:8081/scheduling/student/courses?email=" +
+        "https://mambly-backend-app.herokuapp.com/scheduling/student/courses?email=" +
           localStorage.getItem("email")
       )
       .then((response) => {

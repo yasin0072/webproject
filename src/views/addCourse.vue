@@ -141,7 +141,7 @@ export default {
       // console.log(json);
       const res = axios
         .post(
-          "http://localhost:8081/scheduling/instructor/create-course",
+          "https://mambly-backend-app.herokuapp.com/scheduling/instructor/create-course",
           json,
           {
             headers: {

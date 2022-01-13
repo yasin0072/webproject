@@ -103,7 +103,7 @@ export default {
     submit: function () {
       axios
         .post(
-          "http://localhost:8081/scheduling/auth/" +
+          "https://mambly-backend-app.herokuapp.com/scheduling/auth/" +
             this.role +
             "-signin?email=" +
             this.email +
