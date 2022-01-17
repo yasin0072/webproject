@@ -59,7 +59,7 @@ export default {
   methods: {
     answer(index, answer) {
       axios.delete(
-        "https://mambly-backend-app.herokuapp.com/enroll/cancel-course-instructor?instructorEmail=" +
+        "https://mambly-backend-app.herokuapp.com/scheduling/enroll/cancel-course-instructor?instructorEmail=" +
           localStorage.getItem("email") +
           "&courseId=" +
           this.lessons[index].id
